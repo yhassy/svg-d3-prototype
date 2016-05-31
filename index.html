@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="utf-8">
+<title>SVG Prototype Test</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="cleartype" content="on">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<style>
+body {
+	background: #27262C;
+	padding-top: 40px;
+	margin: auto;
+	position: relative;
+	text-align: center;
+}
+svg {
+    width: 375px;
+}
+</style>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+window.addEventListener('load', function () {
+	d3.xml('App.svg', 'image/svg+xml', function (error, data) {
+	    if (error) {
+	        console.log('Error while loading the SVG file!', error);
+	    } 
+	    else {
+	        d3.select('#container').node().appendChild(data.documentElement)
+	        var content1 = d3.select("#Content1").style("opacity", 1);
+	        var content2 = d3.select("#Content2").style("opacity", 0);
+	        var content3 = d3.select("#Content3").style("opacity", 0);
+	        var navbar =  d3.select('#NavigationBar');
+	        var home = d3.select('#menu-home');
+	        var favorite = d3.select('#menu-favorite');
+	        var account =  d3.select('#menu-account');
+	        var thetitle =  d3.select('#Title');
+	        var bar =  d3.select('#path-1');
+	        home.on('mouseenter', function () {
+	        	home.style('cursor','pointer');
+	        });
+	        home.on('click', function () {
+	        	home.select('polygon').style('fill','#08AA66');
+	        	home.select('text').style('fill','#08AA66');
+	        	favorite.select('path').style('fill','#929CA6');
+	        	favorite.select('text').style('fill','#929CA6');
+	        	account.select('path').style('fill','#929CA6');
+	        	account.select('text').style('fill','#929CA6');
+	        	thetitle.select('tspan').text('Home');
+	        	bar.transition()
+                   	.attr("height", 64)
+                    .ease("out")
+                    .duration("100");
+	        	content1.transition().style('opacity', 1).ease('out').duration('120');
+	        	content2.transition().style('opacity', 0).ease('out').duration('100');
+	        	content3.transition().style('opacity', 0).ease('out').duration('100');
+	        });
+	        favorite.on('mouseenter', function () {
+	        	favorite.style('cursor','pointer');
+	        });
+	        favorite.on('click', function () {
+	        	home.select('polygon').style('fill','#929CA6');
+	        	home.select('text').style('fill','#929CA6');
+	        	favorite.select('path').style('fill','#08AA66');
+	        	favorite.select('text').style('fill','#08AA66');
+	        	account.select('path').style('fill','#929CA6');
+	        	account.select('text').style('fill','#929CA6');
+	        	thetitle.select('tspan').text('Favorite');
+	        	bar.transition()
+                   	.attr("height", 64)
+                    .ease("out")
+                    .duration("100");
+	        	content1.transition().style('opacity', 0).ease('out').duration('100');
+	        	content2.transition().style('opacity', 1).ease('out').duration('120');
+	        	content3.transition().style('opacity', 0).ease('out').duration('100');
+	        });
+	        account.on('mouseenter', function () {
+	        	account.style('cursor','pointer');
+	        });
+	        account.on('click', function () {
+	        	home.select('polygon').style('fill','#929CA6');
+	        	home.select('text').style('fill','#929CA6');
+	        	favorite.select('path').style('fill','#929CA6');
+	        	favorite.select('text').style('fill','#929CA6');
+	        	account.select('path').style('fill','#08AA66');
+	        	account.select('text').style('fill','#08AA66');
+	        	thetitle.select('tspan').text('Account');
+	        	bar.transition()
+                   	.attr("height", 160)
+                    .ease("out")
+                    .duration("150");
+	        	content1.transition().style('opacity', 0).ease('out').duration('100');
+	        	content2.transition().style('opacity', 0).ease('out').duration('100');
+	        	content3.transition().style('opacity', 1).ease('out').duration('120');
+	        });
+	    };
+	});
+});
+
+</script>
+</head>
+<body>
+
+<div id="container"></div>
+
+</body>
+</html>
